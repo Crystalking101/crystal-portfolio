@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
+@theme {
+  --color-cream: #F8F7F4;
+  --color-cream-dark: #F2F0EC;
+  --color-card: #ECEAE6;
+  --color-card-border: #E0DDD8;
+  --color-divider: #E8E6E1;
+  --color-ink: #0F0F0F;
+  --color-muted: #888888;
+  --color-hint: #BBBBBB;
+  --color-blue: #2D6FE8;
+  --color-blue-light: #EAF1FD;
+  --color-rose: #E8B4B8;
+  --color-rose-dark: #B87A7E;
+  --color-rose-light: #F5E6E7;
+
+  --font-serif: Georgia, serif;
+  --font-sans: Inter, system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #F8F7F4;
+  --cream-dark: #F2F0EC;
+  --card: #ECEAE6;
+  --card-border: #E0DDD8;
+  --divider: #E8E6E1;
+  --black: #0F0F0F;
+  --muted: #888888;
+  --hint: #BBBBBB;
+  --blue: #2D6FE8;
+  --blue-light: #EAF1FD;
+  --rose: #E8B4B8;
+  --rose-dark: #B87A7E;
+  --rose-light: #F5E6E7;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-family: Inter, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--black);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Ticker animation ── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Hero fade-up on load ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Rotating headline ── */
+@keyframes rotateWord {
+  0%, 28%  { opacity: 1; transform: translateY(0); }
+  33%, 95% { opacity: 0; transform: translateY(-20px); }
+  100%     { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Skills blob drop-bounce ── */
+@keyframes dropBounce {
+  0%   { opacity: 0; transform: var(--rot) translateY(-900px); }
+  60%  { opacity: 1; transform: var(--rot) translateY(22px); }
+  75%  { transform: var(--rot) translateY(-10px); }
+  88%  { transform: var(--rot) translateY(6px); }
+  100% { opacity: 1; transform: var(--rot); }
+}
+
+.skill-blob.dropped {
+  animation: dropBounce 3.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Hide scrollbar on carousel ── */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }

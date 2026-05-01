@@ -1,0 +1,12 @@
+-- OPTIONAL: DiscoverDramaland competitive landscape is stored in `settings`
+-- (key discover_dramaland_competitive_landscape) by the app — no migration required.
+--
+-- If you prefer a column on `projects` instead, run:
+--
+-- alter table public.projects
+--   add column if not exists competitive_landscape_content text;
+--
+-- Then in SQL Editor run (may help PostgREST pick up the column):
+--   notify pgrst, 'reload schema';
+--
+-- If you still see "schema cache" errors on Supabase, use the settings approach (already in code).
