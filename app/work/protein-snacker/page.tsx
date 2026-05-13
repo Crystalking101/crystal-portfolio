@@ -3,6 +3,7 @@ import path from "node:path";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ProteinSnackerCaseStudyView from "@/components/ProteinSnackerCaseStudyView";
 import { buildProteinCaseStudyScopedCss } from "./proteinCaseStudyCss";
 
 export const metadata: Metadata = {
@@ -34,13 +35,7 @@ export default async function ProteinSnackerCaseStudyPage() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap"
       />
-      <main style={{ flex: 1, margin: 0, padding: 0, display: "block" }}>
-        <style dangerouslySetInnerHTML={{ __html: scopedCss }} />
-        <div
-          id="protein-snacker-cs"
-          dangerouslySetInnerHTML={{ __html: bodyHtml }}
-        />
-      </main>
+      <ProteinSnackerCaseStudyView scopedCss={scopedCss} bodyHtml={bodyHtml} />
       <Footer />
     </>
   );
