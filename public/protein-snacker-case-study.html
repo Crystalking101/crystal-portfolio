@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Protein Snacker — PM Case Study</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FFFDF8;
+      --mint: #E8F8F0;
+      --mint-dark: #2A8C5A;
+      --mint-border: #A8E0C8;
+      --sky: #74D4F7;
+      --sky-dark: #1A9FCC;
+      --sky-bg: #EBF9FF;
+      --sky-border: #B0E8FA;
+      --peach: #FFF0E8;
+      --peach-border: #F5C4A8;
+      --peach-dark: #C46830;
+      --blush: #FFF0F4;
+      --blush-border: #F5B8C8;
+      --blush-dark: #C44870;
+      --lavender: #F4F0FF;
+      --lavender-border: #C8B8F5;
+      --lavender-dark: #6840CC;
+      --buttercup: #FFFBE8;
+      --buttercup-border: #F0D888;
+      --buttercup-dark: #A88020;
+      --dark: #0F0F0F;
+      --text: #1A1A1A;
+      --muted: #666;
+      --label: #999;
+      --border: #E8E6E0;
+      --protein: #2A8C5A;
+      --carbs: #A88020;
+      --sugar: #C44870;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── STICKY SUBNAV (FinTips-style: solid bar, sticks below site header) ── */
+    .subnav {
+      position: sticky;
+      top: 64px;
+      z-index: 45;
+      background: #FFFDF8;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    @media (max-width: 768px) {
+      .subnav {
+        top: 56px;
+      }
+      .hero {
+        padding: 72px 24px 48px;
+        min-height: auto;
+      }
+      .hero-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 28px;
+      }
+      .hero-copy {
+        order: 1;
+      }
+      .hero-visual {
+        order: 2;
+        justify-content: center;
+        margin-right: 0;
+      }
+      .hero h1 {
+        font-size: 48px;
+      }
+      .hero-visual img {
+        width: 100%;
+        max-width: 420px;
+      }
+    }
+
+    .subnav-logo {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .subnav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .subnav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+      font-weight: 500;
+    }
+
+    .subnav-links a:hover {
+      background: rgba(116,212,247,0.12);
+      color: var(--sky-dark);
+    }
+
+    .subnav-cta {
+      background: var(--dark);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #FFF7F0 0%, #F0FFF4 60%, rgba(240,186,242,0.22) 100%);
+      padding: 100px 64px 80px;
+      position: relative;
+      overflow: visible;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(116,212,247,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 30%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(42,140,90,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .hero-copy {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .hero-visual {
+      flex: 0 1 min(560px, 52%);
+      min-width: 0;
+      max-width: min(560px, 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      margin-right: 0;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      max-width: 560px;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(116,212,247,0.12);
+      border: 1px solid rgba(116,212,247,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--sky-dark);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge::before {
+      content: '🐼';
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: #0F1A14;
+      letter-spacing: -1px;
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span {
+      color: var(--sky);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: #555;
+      max-width: 500px;
+      margin-bottom: 56px;
+      line-height: 1.6;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      max-width: 680px;
+    }
+
+    .hero-stat-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 42px;
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .hero-stat-num.sky { color: var(--sky); }
+    .hero-stat-num.mint { color: #4ADFAA; }
+    .hero-stat-num.peach { color: #F5A87A; }
+    .hero-stat-num.white { color: #0F1A14; }
+
+    .hero-stat-label {
+      font-size: 11px;
+      color: #888;
+      line-height: 1.4;
+    }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 32px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: sticky;
+      top: 32px;
+    }
+
+    .sidebar-card {
+      background: white;
+      border: 2px solid var(--sky);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 24px rgba(116,212,247,0.15);
+      margin-bottom: 20px;
+    }
+
+    .sidebar-field { margin-bottom: 20px; }
+    .sidebar-field:last-child { margin-bottom: 0; }
+
+    .sidebar-label {
+      font-size: 10px;
+      color: var(--label);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-value {
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .tag-sky { background: var(--sky-bg); color: var(--sky-dark); border: 1px solid var(--sky-border); }
+    .tag-mint { background: var(--mint); color: var(--mint-dark); border: 1px solid var(--mint-border); }
+    .tag-peach { background: var(--peach); color: var(--peach-dark); border: 1px solid var(--peach-border); }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--peach-dark);
+      background: var(--peach);
+      border: 1px solid var(--peach-border);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--peach-dark);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main { min-width: 0; }
+
+    .section { margin-bottom: 64px; }
+
+    .section-label {
+      font-size: 10px;
+      color: var(--label);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .lead {
+      font-size: 17px !important;
+      color: var(--text) !important;
+      font-weight: 500;
+    }
+
+    .section p.design-sketch-caption {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      color: var(--muted);
+      margin-top: 18px;
+      margin-bottom: 16px;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      border-left: 3px solid var(--sky);
+      background: var(--sky-bg);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+
+    .callout p {
+      font-size: 15px;
+      color: var(--sky-dark);
+      margin: 0;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* ── PERSONA CARDS ── */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .persona-card {
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid;
+    }
+
+    .persona-card.primary {
+      background: var(--sky-bg);
+      border-color: var(--sky-border);
+      grid-column: 1 / -1;
+    }
+
+    .persona-card.secondary {
+      background: var(--mint);
+      border-color: var(--mint-border);
+    }
+
+    .persona-card.tertiary {
+      background: var(--lavender);
+      border-color: var(--lavender-border);
+    }
+
+    .persona-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .persona-tag.sky { color: var(--sky-dark); }
+    .persona-tag.mint { color: var(--mint-dark); }
+    .persona-tag.lavender { color: var(--lavender-dark); }
+
+    .persona-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .persona-card p {
+      font-size: 13px !important;
+      line-height: 1.7 !important;
+    }
+
+    .persona-insight {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: rgba(116,212,247,0.1);
+      border-radius: 8px;
+      font-size: 13px !important;
+      color: var(--sky-dark) !important;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+
+    .feature-card.sky { border-top: 3px solid var(--sky); }
+    .feature-card.mint { border-top: 3px solid var(--mint-dark); }
+    .feature-card.peach { border-top: 3px solid var(--peach-dark); }
+    .feature-card.blush { border-top: 3px solid var(--blush-dark); }
+    .feature-card.lavender { border-top: 3px solid var(--lavender-dark); }
+    .feature-card.buttercup { border-top: 3px solid var(--buttercup-dark); }
+
+    .feature-card-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .feature-card-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .feature-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 !important;
+    }
+
+    /* ── FEATURE LIST ── */
+    .feature-list { margin-top: 20px; }
+
+    .feature-item {
+      display: flex;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-item:last-child { border-bottom: none; }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+
+    .feature-icon.sky { background: var(--sky-bg); }
+    .feature-icon.mint { background: var(--mint); }
+    .feature-icon.peach { background: var(--peach); }
+    .feature-icon.blush { background: var(--blush); }
+    .feature-icon.lavender { background: var(--lavender); }
+    .feature-icon.buttercup { background: var(--buttercup); }
+
+    .feature-content { flex: 1; }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 !important;
+    }
+
+    /* ── DATA LAYERS ── */
+    .layer-list { margin-top: 20px; }
+
+    .layer-item {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .layer-item:last-child { border-bottom: none; }
+
+    .layer-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: white;
+      background: var(--dark);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .layer-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .layer-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 !important;
+    }
+
+    /* ── MONETIZATION ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .pricing-card {
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      background: white;
+    }
+
+    .pricing-card.premium {
+      border-color: var(--sky-border);
+      background: var(--sky-bg);
+    }
+
+    .pricing-tier {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 8px;
+    }
+
+    .pricing-tier.sky { color: var(--sky-dark); }
+
+    .pricing-price {
+      font-family: 'DM Mono', monospace;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .pricing-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .pricing-features { list-style: none; }
+
+    .pricing-features li {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mint-dark);
+      flex-shrink: 0;
+    }
+
+    .pricing-features.premium-list li::before { color: var(--sky-dark); }
+
+    /* ── METRICS ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .metric-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .metric-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .metric-num.sky { color: var(--sky-dark); }
+    .metric-num.mint { color: var(--mint-dark); }
+    .metric-num.peach { color: var(--peach-dark); }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── RISKS ── */
+    .risk-list { margin-top: 20px; }
+
+    .risk-item {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .risk-item:last-child { border-bottom: none; }
+
+    .risk-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .risk-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 !important;
+    }
+
+    .risk-mitigation {
+      font-size: 12px;
+      color: var(--mint-dark);
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    /* ── ROADMAP ── */
+    .roadmap-list { margin-top: 20px; }
+
+    .roadmap-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .roadmap-item:last-child { border-bottom: none; }
+
+    .roadmap-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--sky-dark);
+      background: var(--sky-bg);
+      border: 1px solid var(--sky-border);
+      border-radius: 8px;
+      padding: 4px 10px;
+      flex-shrink: 0;
+      height: fit-content;
+    }
+
+    .roadmap-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .roadmap-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 !important;
+    }
+
+    /* ── OUT OF SCOPE ── */
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .scope-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .scope-x {
+      font-size: 11px;
+      font-weight: 700;
+      color: #CC4444;
+      background: #FEE2E2;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── DEMONSTRATES ── */
+    .demonstrates-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .demonstrates-item {
+      padding: 18px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: white;
+    }
+
+    .demonstrates-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .demonstrates-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0 !important;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, #FFF7F0 0%, #F0FFF4 100%);
+      padding: 80px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '🐼';
+      position: absolute;
+      font-size: 200px;
+      opacity: 0.12;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: #0F1A14;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      background: var(--sky);
+      color: #0A1F18;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(0,0,0,0.15);
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 64px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge">Side Project · Mobile App · In Development</div>
+      <h1>Protein<br/><span>Snacker</span> 🐼</h1>
+      <p class="hero-sub">A snack discovery engine for people who live and breathe macros. Find your perfect high-protein snack in under 60 seconds.</p>
+    </div>
+    <div class="hero-visual">
+      <img src="/proteinsnacker-hero.png" alt="Protein Snacker app mockup — welcome and My Goals screens" decoding="async" style="width:100%;max-width:560px;height:auto;display:block;border-radius:12px;" />
+    </div>
+  </div>
+</section>
+
+<!-- STICKY SUBNAV -->
+<nav class="subnav">
+  <a href="#" class="subnav-logo">🐼 Protein Snacker</a>
+  <div class="subnav-links">
+    <a href="#problem">Problem</a>
+    <a href="#market">Market</a>
+    <a href="#competitive">Competitive</a>
+    <a href="#users">Users</a>
+    <a href="#solution">Solution</a>
+    <a href="#design">Design</a>
+    <a href="#features">Features</a>
+    <a href="#data">Data</a>
+    <a href="#monetization">Monetization</a>
+    <a href="#metrics">Metrics</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <a href="mailto:king.d.crystal@gmail.com" class="subnav-cta">Get in touch →</a>
+</nav>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-field">
+        <div class="sidebar-label">Role</div>
+        <div class="sidebar-value">Founder & Product Manager</div>
+      </div>
+      <div class="sidebar-field">
+        <div class="sidebar-label">Timeline</div>
+        <div class="sidebar-value">2026 — In Development</div>
+      </div>
+      <div class="sidebar-field">
+        <div class="sidebar-label">Type</div>
+        <div class="sidebar-value">Side Project · Mobile App</div>
+      </div>
+      <div class="sidebar-field">
+        <div class="sidebar-label">Status</div>
+        <div class="sidebar-value">
+          <span class="status-badge">In Development</span>
+        </div>
+      </div>
+      <div class="sidebar-field">
+        <div class="sidebar-label">Target Launch</div>
+        <div class="sidebar-value">Q4 2026</div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-field">
+        <div class="sidebar-label">Stack</div>
+        <div class="tags">
+          <span class="tag tag-sky">React Native</span>
+          <span class="tag tag-sky">Expo</span>
+          <span class="tag tag-sky">Supabase</span>
+          <span class="tag tag-mint">FatSecret API</span>
+          <span class="tag tag-mint">Open Food Facts</span>
+          <span class="tag tag-peach">iOS & Android</span>
+        </div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-field">
+        <div class="sidebar-label">Focus</div>
+        <div class="tags">
+          <span class="tag tag-sky">0-to-1 Product</span>
+          <span class="tag tag-mint">Health & Fitness</span>
+          <span class="tag tag-peach">Consumer Mobile</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <div class="section">
+      <div class="section-label">Overview</div>
+      <h2>The snack discovery app for macro trackers</h2>
+      <p class="lead">Protein Snacker is a mobile app for iOS and Android that helps health-conscious users discover high-protein, low-carb and low-sugar snacks, protein drinks and powders tailored to their personal dietary goals.</p>
+      <p>Powered by a real-time filter engine and a 4-layer nutrition database, Protein Snacker eliminates the frustration of label-scanning in grocery aisles and endless scrolling on Amazon. A friendly panda mascot guides users through every step of the snack discovery journey.</p>
+      <p>The app is currently in active development with a target launch of Q4 2026.</p>
+      <p style="margin-top: 24px; font-size: 15px; color: var(--muted);">The vision for Protein Snacker goes beyond the build. These numbers represent where the product is headed and the scale it is designed to reach.</p>
+      <div class="hero-stats" style="margin-top: 24px;">
+        <div>
+          <div class="hero-stat-num sky">5K</div>
+          <div class="hero-stat-label">downloads target<br/>in 90 days</div>
+        </div>
+        <div>
+          <div class="hero-stat-num mint">500+</div>
+          <div class="hero-stat-label">curated hero<br/>snacks at launch</div>
+        </div>
+        <div>
+          <div class="hero-stat-num peach">$4.99</div>
+          <div class="hero-stat-label">per month<br/>premium tier</div>
+        </div>
+        <div>
+          <div class="hero-stat-num white">4</div>
+          <div class="hero-stat-label">data source<br/>layers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- THE PROBLEM -->
+    <div class="section" id="problem">
+      <div class="section-label">The Problem</div>
+      <h2>Finding compliant snacks is surprisingly hard</h2>
+      <p class="lead">People who prioritize protein intake have no fast, goal-aware way to discover snacks that match their exact macro requirements.</p>
+      <p>Existing apps like MyFitnessPal focus on logging what you already eat, not helping you find what you should be eating. Grocery apps surface products by brand, not nutrition goals. Amazon returns thousands of results with no way to filter by macros.</p>
+      <p>The result is frustrating. Users either spend excessive time reading labels in grocery aisles, default to the same 3 to 4 familiar products, or miss a huge category of better-fit options they never even knew existed.</p>
+      <div class="callout">
+        <p>"I know my macros. I just need someone to tell me what I can actually eat."</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- MARKET OPPORTUNITY -->
+    <div class="section" id="market">
+      <div class="section-label">Market Opportunity</div>
+      <h2>A $5.3 billion market with no dedicated discovery tool</h2>
+      <p class="lead">The global protein snack market reached $5.3 billion in 2024 and is growing at 9.1% annually through 2034, with North America leading at 38.6% of global revenue.</p>
+      <p>70% of consumers are actively trying to increase their protein intake, and protein bars alone account for 37% of the total product category. Online retail is one of the fastest growing channels, making a mobile-first discovery experience especially well timed.</p>
+      <p>The demand is there. The behavior is shifting. Yet no dedicated tool exists to help consumers find the right high-protein snack for their specific goals in a fast and frictionless way. Protein Snacker is built for exactly that gap.</p>
+      <img src="/proteinsnacker-Market.png" alt="Protein Snacker market opportunity" style="width: 100%; margin-top: 32px; border-radius: 12px;" />
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- COMPETITIVE LANDSCAPE -->
+    <div class="section" id="competitive">
+      <div class="section-label">Competitive Landscape</div>
+      <h2>Where Protein Snacker sits in the market</h2>
+      <p class="lead">Every alternative requires users to either log food, scroll through unfiltered results or rely on trends. Protein Snacker is the only tool that helps you find the right snack for your exact goals in seconds.</p>
+      <img src="/protein_snacker_competitive.png" alt="Protein Snacker competitive landscape" style="width: 100%; margin-top: 32px; border-radius: 12px;" />
+      <p style="margin-top: 24px;">The competition helps you track what you already eat. Protein Snacker helps you discover what you should be eating.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- WHO WE ARE BUILDING FOR -->
+    <div class="section" id="users">
+      <div class="section-label">Target Users</div>
+      <h2>Who we are building for</h2>
+      <p>Three distinct users with different relationships to protein and fitness — each requiring a different product response.</p>
+
+      <div class="persona-grid">
+        <div class="persona-card primary">
+          <div class="persona-tag sky">Primary Persona</div>
+          <div class="persona-name">The Macro Tracker</div>
+          <p>Age 22 to 38. Gym-goer, athlete or fitness enthusiast who tracks macros in MyFitnessPal or a similar app. Frustrated by the time it takes to find compliant snacks. Values convenience and variety. Spends $30 to $80 per month on protein snacks and supplements.</p>
+          <div class="persona-insight">Core need: Find a snack that hits my numbers in under 60 seconds without opening a nutrition label.</div>
+        </div>
+        <div class="persona-card secondary">
+          <div class="persona-tag mint">Secondary Persona</div>
+          <div class="persona-name">The Health-Conscious Professional</div>
+          <p>Age 28 to 45. Busy professional eating clean but not strictly tracking. Interested in reducing sugar and carbs. Shops at Whole Foods, Target and Amazon. Wants quick product validation without deep nutrition coaching.</p>
+        </div>
+        <div class="persona-card tertiary">
+          <div class="persona-tag lavender">Tertiary Persona</div>
+          <div class="persona-name">The Supplement Seeker</div>
+          <p>Age 18 to 30. College student or early career professional actively researching protein powders and ready-to-drink protein drinks. Price-conscious but willing to pay for the right product. Heavy social media user likely to share finds.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- DESIGN PROCESS -->
+    <div class="section" id="design">
+      <div class="section-label">Design Process</div>
+      <h2>From concept to prototype</h2>
+      <p class="lead">Protein Snacker is currently in active development. Early design decisions were driven by one core principle: make snack discovery feel fast, friendly and effortless.</p>
+      <img src="/proteinsnacker-design.png" alt="Early Protein Snacker wireframes — onboarding, results, eraser board, limitations and macros flows" style="width: 100%; margin-top: 28px; border-radius: 12px;" />
+      <p class="design-sketch-caption">The design process began on the iPad, sketching out the core screens before writing a single line of code. Each frame focused on the key user decisions including setting macro targets, browsing results, scanning barcodes and managing goals, ensuring the product logic was solid before moving into development.</p>
+      <img src="/proteinsnacker-process.png" alt="Protein Snacker prototypes — onboarding flows and panda mascot logo explorations" style="width: 100%; margin-top: 24px; border-radius: 12px;" />
+      <p class="design-sketch-caption">The prototyping phase involved iterating through several visual directions, from dark mode to light, before arriving at the playful pastel theme that best matched the friendly and approachable tone of Protein Snacker. A panda mascot was chosen as the face of the brand and will be used consistently throughout the app, with placeholder logos in place while the final version is finalized.</p>
+      <img src="/proteinsnacker-user.png" alt="Protein Snacker — onboarding, snack feed, search, goals, saved snacks and settings screens" style="display: block; width: calc(100% + 40px); max-width: none; margin: 24px -20px 32px -20px; border-radius: 12px;" />
+      <p>The design system uses a cream to mint gradient background, Fredoka for headings and Plus Jakarta Sans for body text to create a warm and approachable feel without sacrificing utility. A panda mascot guides users through onboarding and celebrates key moments throughout the app experience.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- THE SOLUTION -->
+    <div class="section" id="solution">
+      <div class="section-label">The Solution</div>
+      <h2>A dedicated snack discovery engine</h2>
+      <p class="lead">Protein Snacker is not a food tracker. It is a discovery tool.</p>
+      <p>Users enter their macro targets once during onboarding and the app does the work from there, surfacing snacks that match their exact goals across bars, jerky, chips, powders, ready-to-drink drinks, yogurt and more.</p>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon sky">🎯</div>
+          <div class="feature-content">
+            <div class="feature-title">Goal-based onboarding</div>
+            <p class="feature-desc">A 5-screen onboarding flow guided by the panda mascot captures macro targets and dietary preferences upfront so every result is personalized from the very first search.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon mint">⚡</div>
+          <div class="feature-content">
+            <div class="feature-title">Real-time filter engine</div>
+            <p class="feature-desc">Macro sliders and dietary toggles return results instantly. Minimum protein, maximum carbs, maximum sugar, category and dietary filters all update in real time with no waiting and no page refreshes.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon peach">📷</div>
+          <div class="feature-content">
+            <div class="feature-title">Barcode scanner</div>
+            <p class="feature-desc">Scan any product in-store or at home for instant macro analysis against your saved goals. Match or no-match result displayed instantly. Available on both free and premium tiers at launch.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon blush">❤️</div>
+          <div class="feature-content">
+            <div class="feature-title">Saved favorites and snack lists</div>
+            <p class="feature-desc">Save snacks to named lists like Pre-Workout, Office Snacks or Amazon Cart. Free tier allows 2 lists and 20 items. Premium unlocks unlimited lists and saved items with shareable list links.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon lavender">📋</div>
+          <div class="feature-content">
+            <div class="feature-title">Snack detail page</div>
+            <p class="feature-desc">Full nutrition panel styled like an FDA label. Macro match score color-coded green, yellow or red against your goals. Where-to-buy links for Amazon, Instacart and brand sites. Similar snacks carousel at the bottom.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon buttercup">🐼</div>
+          <div class="feature-content">
+            <div class="feature-title">Panda mascot throughout</div>
+            <p class="feature-desc">A delightful panda character guides users through onboarding, celebrates saves and adds personality across the app experience. The design language is warm, playful and approachable without sacrificing utility.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- FEATURES -->
+    <div class="section" id="features">
+      <div class="section-label">Features</div>
+      <h2>Built for how macro trackers actually think</h2>
+      <p>Every feature in Protein Snacker was designed around one question: what does a macro tracker need in the moment they are hungry and need to make a fast, compliant choice?</p>
+
+      <div class="features-grid">
+        <div class="feature-card sky">
+          <span class="feature-card-icon">🎯</span>
+          <div class="feature-card-title">Goal-based Onboarding</div>
+          <p class="feature-card-desc">A 5-screen onboarding flow guided by the panda mascot captures macro targets and dietary preferences upfront so every result is personalized from the very first search.</p>
+        </div>
+        <div class="feature-card mint">
+          <span class="feature-card-icon">⚡</span>
+          <div class="feature-card-title">Real-time Filter Engine</div>
+          <p class="feature-card-desc">Macro sliders and dietary toggles return results instantly. Minimum protein, maximum carbs, maximum sugar — all update in real time with no waiting and no page refreshes.</p>
+        </div>
+        <div class="feature-card peach">
+          <span class="feature-card-icon">📷</span>
+          <div class="feature-card-title">Barcode Scanner</div>
+          <p class="feature-card-desc">Scan any product in-store or at home for instant macro analysis against your saved goals. Match or no-match displayed instantly. Available on both free and premium tiers at launch.</p>
+        </div>
+        <div class="feature-card blush">
+          <span class="feature-card-icon">❤️</span>
+          <div class="feature-card-title">Saved Snack Lists</div>
+          <p class="feature-card-desc">Save snacks to named lists like Pre-Workout or Office Snacks. Free tier allows 2 lists and 20 items. Premium unlocks unlimited lists with shareable links.</p>
+        </div>
+        <div class="feature-card lavender">
+          <span class="feature-card-icon">📋</span>
+          <div class="feature-card-title">Snack Detail Page</div>
+          <p class="feature-card-desc">Full nutrition panel styled like an FDA label. Macro match score color-coded green, yellow or red. Where-to-buy links for Amazon, Instacart and brand sites. Similar snacks carousel below.</p>
+        </div>
+        <div class="feature-card buttercup">
+          <span class="feature-card-icon">🐼</span>
+          <div class="feature-card-title">Panda Mascot</div>
+          <p class="feature-card-desc">A delightful panda guides users through onboarding, celebrates saves and adds warmth across the full app experience. Playful and approachable without sacrificing utility.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="section-divider"></div>
+
+    <!-- DATA ARCHITECTURE -->
+    <div class="section" id="data">
+      <div class="section-label">Data Architecture</div>
+      <h2>A 4-layer data strategy built for scale</h2>
+      <p class="lead">The database strategy is one of the most technically differentiated decisions in this product.</p>
+      <p>Protein Snacker uses a layered multi-source data architecture designed to maximize snack coverage and barcode match rate while keeping API costs near zero at launch.</p>
+
+      <div class="layer-list">
+        <div class="layer-item">
+          <div class="layer-num">1</div>
+          <div>
+            <div class="layer-title">Manual curated database — Supabase</div>
+            <p class="layer-desc">500 hand-verified hero snacks stored directly in Supabase. Fast, reliable and always available with zero API dependency. This is what users see first. Every product has a full nutrition panel, product image, category tags, dietary flags and purchase links.</p>
+          </div>
+        </div>
+        <div class="layer-item">
+          <div class="layer-num">2</div>
+          <div>
+            <div class="layer-title">Open Food Facts — synced nightly</div>
+            <p class="layer-desc">A free, open-source database of 2.5M+ products synced nightly into Supabase. Freely cacheable with no restrictions. Covers broad packaged snack coverage with barcode mapping. Products are validated on ingest — all core macro fields required before surfacing.</p>
+          </div>
+        </div>
+        <div class="layer-item">
+          <div class="layer-num">3</div>
+          <div>
+            <div class="layer-title">USDA FoodData Central — synced monthly</div>
+            <p class="layer-desc">Government-maintained nutrition data synced monthly. Used as a data quality reference and tiebreaker for generic foods when sources disagree. Covers 250,000 foods. No API key required.</p>
+          </div>
+        </div>
+        <div class="layer-item">
+          <div class="layer-num">4</div>
+          <div>
+            <div class="layer-title">FatSecret API — live calls only</div>
+            <p class="layer-desc">The primary live API called only when Supabase layers return no result. Selected for its 5,000 free daily calls (5x more than competitors), 90%+ barcode match rate and 2.3M+ verified food items. Trusted by Amazon, Fitbit and Samsung. Most users will never trigger a paid API call.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- MONETIZATION -->
+    <div class="section" id="monetization">
+      <div class="section-label">Monetization</div>
+      <h2>Freemium with natural upgrade triggers</h2>
+      <p>The free tier is fully functional for core discovery to maximize top-of-funnel growth. Premium unlocks power-user features for engaged users. Pricing was set below the $9.99 fitness app ceiling to be impulse-friendly while delivering positive unit economics with fewer than 100 premium users needed to cover API costs at launch.</p>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-tier">Free Tier</div>
+          <div class="pricing-price">$0</div>
+          <div class="pricing-sub">Forever free</div>
+          <ul class="pricing-features">
+            <li>Full filter and search engine</li>
+            <li>Barcode scanner</li>
+            <li>Up to 2 snack lists</li>
+            <li>20 saved items total</li>
+            <li>7-day scan history</li>
+          </ul>
+        </div>
+        <div class="pricing-card premium">
+          <div class="pricing-tier sky">Premium Tier</div>
+          <div class="pricing-price">$4.99</div>
+          <div class="pricing-sub">Per month or $29.99 per year</div>
+          <ul class="pricing-features premium-list">
+            <li>Everything in free</li>
+            <li>Unlimited snack lists</li>
+            <li>Unlimited saved items</li>
+            <li>Full scan history</li>
+            <li>Shareable list links</li>
+            <li>Data export as CSV</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- SUCCESS METRICS -->
+    <div class="section" id="metrics">
+      <div class="section-label">How Success Is Measured</div>
+      <h2>North star: Weekly Active Snack Discoverers</h2>
+      <p>Users who perform at least one search or scan per week. For a discovery app, success is habitual use. A user who opens Protein Snacker every week to find new snacks is the core outcome.</p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-num sky">5K</div>
+          <div class="metric-label">downloads within<br/>90 days of launch</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num mint">5%</div>
+          <div class="metric-label">free to premium conversion<br/>within 6 months</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num peach">4.5+</div>
+          <div class="metric-label">App Store rating<br/>target</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <p><strong>Acquisition:</strong> App Store and Google Play downloads and organic search.</p>
+        <p><strong>Activation:</strong> Percentage of users who complete onboarding and perform their first search.</p>
+        <p><strong>Engagement:</strong> Snacks saved per session and barcode scans per week.</p>
+        <p><strong>Retention:</strong> Week 2 and Week 4 return rate.</p>
+        <p><strong>Revenue:</strong> Free to premium conversion rate and monthly recurring revenue.</p>
+      </div>
+    </div>
+
+
+    <div class="section-divider"></div>
+
+    <!-- WHAT WAS LEFT OUT -->
+    <div class="section">
+      <div class="section-label">What Was Left Out</div>
+      <h2>Stay in the discovery lane</h2>
+      <p>These features were explicitly excluded from Version 1 to keep the MVP lean and focused on the core snack discovery use case.</p>
+
+      <div class="scope-grid">
+        <div class="scope-item"><span class="scope-x">✕</span>Meal planning and full-day nutrition tracking</div>
+        <div class="scope-item"><span class="scope-x">✕</span>Social features and public profiles</div>
+        <div class="scope-item"><span class="scope-x">✕</span>Recipe builder and cooking instructions</div>
+        <div class="scope-item"><span class="scope-x">✕</span>Restaurant and fast food macro lookup</div>
+        <div class="scope-item"><span class="scope-x">✕</span>AI-powered chatbot or conversational advisor</div>
+        <div class="scope-item"><span class="scope-x">✕</span>Apple Watch and wearable integration</div>
+        <div class="scope-item"><span class="scope-x">✕</span>User-submitted reviews with photo uploads</div>
+        <div class="scope-item"><span class="scope-x">✕</span>Loyalty and rewards program</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- RISKS -->
+    <div class="section">
+      <div class="section-label">Risks</div>
+      <h2>Known risks and mitigations</h2>
+
+      <div class="risk-list">
+        <div class="risk-item">
+          <div class="risk-title">Data quality from crowd-sourced sources</div>
+          <p class="risk-desc">Open Food Facts data varies in accuracy since it is crowd-sourced. Products with missing or conflicting macro data could surface bad results.</p>
+          <div class="risk-mitigation">Mitigation: Validation rules on ingest require all core macro fields before a product is surfaced. Failed records are quarantined, not deleted.</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-title">API costs at scale</div>
+          <p class="risk-desc">FatSecret's free tier covers 5,000 daily calls. Heavy usage could push into paid territory unexpectedly.</p>
+          <div class="risk-mitigation">Mitigation: The 3-layer Supabase cache means most users never trigger a live API call. Upgrade to FatSecret Premier when daily calls consistently exceed 4,000.</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-title">App Store approval delays</div>
+          <p class="risk-desc">Apple and Google review processes can delay launch timelines unpredictably.</p>
+          <div class="risk-mitigation">Mitigation: Using Expo to streamline the submission process and submitting early with buffer time before the Q3 target.</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-title">Cold start on catalog</div>
+          <p class="risk-desc">Users may not find their specific niche snack on day one, creating a poor first experience.</p>
+          <div class="risk-mitigation">Mitigation: The 500-snack curated database ensures a strong experience for the most popular products before the broader database fills in via API layers.</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-title">Freemium conversion</div>
+          <p class="risk-desc">Users may stay on the free tier indefinitely if the upgrade prompt does not land at the right moment.</p>
+          <div class="risk-mitigation">Mitigation: Free tier is intentionally limited on saves and lists so power users feel the upgrade prompt naturally through usage, not through hard paywalls.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- WHAT IS COMING NEXT -->
+    <div class="section" id="roadmap">
+      <div class="section-label">What Is Coming Next</div>
+      <h2>Version 2 priorities</h2>
+      <p>The goal is simple. Be the first place a macro tracker opens when they need a new snack idea. Make discovery so good it feels like the app knows you.</p>
+
+      <div class="roadmap-list">
+        <div class="roadmap-item">
+          <div class="roadmap-num">01</div>
+          <div>
+            <div class="roadmap-title">AI-powered snack recommendations</div>
+            <p class="roadmap-desc">Move beyond filters to serve users who want to be surprised by something new that still fits their goals. Personalized recommendations based on save history and macro patterns.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">02</div>
+          <div>
+            <div class="roadmap-title">Social sharing and public lists</div>
+            <p class="roadmap-desc">Let users share snack lists publicly and follow other users with similar goals. Community layer that rewards power users for curating great lists.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">03</div>
+          <div>
+            <div class="roadmap-title">Supplement expansion</div>
+            <p class="roadmap-desc">Extend beyond protein powders and RTD drinks to vitamins and broader supplement categories. A natural extension of the existing discovery model.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">04</div>
+          <div>
+            <div class="roadmap-title">Apple Watch integration</div>
+            <p class="roadmap-desc">Quick macro check from the wrist during a grocery run. Post-launch once the mobile experience is fully validated and user behavior is understood.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- WHAT THIS DEMONSTRATES -->
+    <div class="section">
+      <div class="section-label">What This Project Demonstrates</div>
+      <h2>End-to-end product thinking</h2>
+
+      <div class="demonstrates-grid">
+        <div class="demonstrates-item">
+          <div class="demonstrates-title">Market insight</div>
+          <p class="demonstrates-desc">Identified a real gap between how people think about snack goals and how existing apps serve them.</p>
+        </div>
+        <div class="demonstrates-item">
+          <div class="demonstrates-title">User empathy</div>
+          <p class="demonstrates-desc">Built three distinct personas each requiring a different product response, not a one-size-fits-all solution.</p>
+        </div>
+        <div class="demonstrates-item">
+          <div class="demonstrates-title">Data strategy</div>
+          <p class="demonstrates-desc">Designed a 4-layer architecture that maximizes coverage and barcode match rate while keeping costs near zero at launch.</p>
+        </div>
+        <div class="demonstrates-item">
+          <div class="demonstrates-title">Prioritization</div>
+          <p class="demonstrates-desc">Deliberately excluded meal planning, social features and AI to stay focused on the core discovery use case.</p>
+        </div>
+        <div class="demonstrates-item">
+          <div class="demonstrates-title">Monetization thinking</div>
+          <p class="demonstrates-desc">Designed a freemium model with natural upgrade triggers based on real usage patterns, not arbitrary paywalls.</p>
+        </div>
+        <div class="demonstrates-item">
+          <div class="demonstrates-title">End-to-end ownership</div>
+          <p class="demonstrates-desc">Led product, design, data architecture, API strategy, monetization and roadmap planning independently.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Currently in development</h2>
+  <p>Protein Snacker is targeting a Q4 2026 launch on iOS and Android.</p>
+  <div class="cta-buttons">
+    <a href="mailto:king.d.crystal@gmail.com" class="btn-primary">Get in touch →</a>
+    <a href="/work" class="btn-outline">View my other projects</a>
+  </div>
+</section>
+
+</body>
+</html>

@@ -2,7 +2,11 @@ import ProjectForm from "@/components/admin/ProjectForm";
 import { createServerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY, type Project } from "@/lib/supabase";
+import {
+  DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY,
+  settingsValueAsMarkdown,
+  type Project,
+} from "@/lib/supabase";
 
 export const metadata = { title: "Admin — Edit Project" };
 
@@ -38,7 +42,10 @@ export default async function EditProjectPage({ params }: Props) {
       .select("value")
       .eq("key", DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY)
       .maybeSingle();
-    project = { ...project, competitive_landscape_content: row?.value ?? null };
+    project = {
+      ...project,
+      competitive_landscape_content: settingsValueAsMarkdown(row?.value),
+    };
   }
 
   return <ProjectForm initialData={project} projectId={project.id} />;

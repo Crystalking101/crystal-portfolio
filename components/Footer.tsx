@@ -71,6 +71,32 @@ export default function Footer() {
           >
             LinkedIn
           </a>
+          <span
+            style={{
+              color: "#C47A7E",
+              fontSize: "8px",
+              margin: "0 12px",
+              lineHeight: 1,
+            }}
+          >
+            ●
+          </span>
+          <a
+            href="https://github.com/Crystalking101"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "Inter, system-ui, sans-serif",
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "#7A3D41",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.75")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            GitHub
+          </a>
         </div>
       </div>
 
@@ -94,7 +120,7 @@ export default function Footer() {
           margin: 0,
         }}
       >
-        Copyright © 2026 Crystal King. Built by me. Obviously.
+        © 2026 Crystal King. Independently designed, built, and launched.
       </p>
     </footer>
   );

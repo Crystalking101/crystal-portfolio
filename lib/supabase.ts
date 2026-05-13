@@ -8,6 +8,14 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 /** Settings row key for DiscoverDramaland competitive landscape markdown (avoids new `projects` columns / schema cache issues). */
 export const DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY = "discover_dramaland_competitive_landscape";
 
+/** Coerce `settings.value` (text or jsonb) into a string for markdown fields. */
+export function settingsValueAsMarkdown(value: unknown): string | null {
+  if (value == null) return null;
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  return null;
+}
+
 export type Project = {
   id: string;
   created_at: string;

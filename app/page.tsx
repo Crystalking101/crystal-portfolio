@@ -5,8 +5,15 @@ import WhatIBring from "@/components/WhatIBring";
 import SkillsDrop from "@/components/SkillsDrop";
 import QuoteBanner from "@/components/QuoteBanner";
 import Footer from "@/components/Footer";
+import ProjectCarousel from "@/components/ProjectCarousel";
+import { getPublishedSideProjects, getPublishedWorkProjects } from "@/lib/portfolio-projects";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [workProjects, sideProjects] = await Promise.all([
+    getPublishedWorkProjects(),
+    getPublishedSideProjects(),
+  ]);
+
   return (
     <>
       <Nav />
@@ -16,6 +23,7 @@ export default function HomePage() {
         <WhatIBring />
         <SkillsDrop />
         <QuoteBanner />
+        <ProjectCarousel workProjects={workProjects} sideProjects={sideProjects} />
       </main>
       <Footer />
     </>

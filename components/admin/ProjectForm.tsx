@@ -600,13 +600,13 @@ export default function ProjectForm({ initialData, projectId }: Props) {
             margin: "0 0 12px",
           }}
         >
-          Saved to site <strong style={{ color: "#666" }}>settings</strong> (key <code>{DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY}</code>) so you don&apos;t need a new column on <code>projects</code>. Renders between <strong style={{ color: "#666" }}>The Market Insight</strong> and the next section on the live case study.
+          You can put this block in the <strong style={{ color: "#666" }}>case study</strong> as <code style={{ fontSize: "11px" }}>## Competitive Landscape</code> (anywhere) <em>or</em> here. Case study wins if this field is empty. Saved to <code>settings</code> (key <code>{DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY}</code>). Use markdown or HTML. Renders between <strong style={{ color: "#666" }}>The Market Insight</strong> and the next section.
         </p>
         <textarea
           value={competitiveLandscapeContent}
           onChange={(e) => setCompetitiveLandscapeContent(e.target.value)}
           rows={12}
-          placeholder={`![Short Drama Competitive Landscape](/drama-competitive.png)`}
+          placeholder="Optional: markdown or HTML for this section."
           style={{
             ...inputStyle,
             resize: "vertical",

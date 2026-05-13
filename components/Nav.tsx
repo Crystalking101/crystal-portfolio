@@ -34,12 +34,13 @@ export default function Nav() {
       <a
         href="/"
         style={{
-          fontFamily: "Georgia, serif",
-          fontSize: "20px",
-          fontWeight: 700,
+          fontFamily: "var(--font-playfair), Georgia, serif",
+          fontSize: isMobile ? "24px" : "clamp(26px, 2.8vw, 32px)",
+          fontWeight: 600,
           color: "#0F0F0F",
           textDecoration: "none",
-          letterSpacing: "-0.4px",
+          letterSpacing: "-0.6px",
+          lineHeight: 1.1,
         }}
       >
         Crystal King
@@ -82,15 +83,20 @@ export default function Nav() {
             fontFamily: "Inter, system-ui, sans-serif",
             fontSize: "13px",
             fontWeight: 500,
-            color: "#fff",
-            background: "#2D6FE8",
+            color: "#FFFFFF",
+            background: "#B87A7E",
             padding: "7px 16px",
             borderRadius: "4px",
             textDecoration: "none",
-            transition: "opacity 0.15s",
+            border: "1px solid rgba(255,255,255,0.2)",
+            transition: "background 0.15s, opacity 0.15s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "#9E656A";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "#B87A7E";
+          }}
         >
           Resume
         </a>

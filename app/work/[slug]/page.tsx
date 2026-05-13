@@ -1,12 +1,23 @@
 import CaseStudyContent from "@/components/CaseStudyContent";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
-import { DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY, supabase, type Project } from "@/lib/supabase";
+import {
+  DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY,
+  settingsValueAsMarkdown,
+  supabase,
+  type Project,
+} from "@/lib/supabase";
 import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
+
+/** Canonical copy fix when CMS still has older wording. */
+const KRI_ROUTINE_REVIEW_OLD =
+  "I uncovered this independently during a routine review of Key Risk Indicator processes.";
+const KRI_ROUTINE_REVIEW_NEW =
+  "I uncovered this independently during a routine review.";
 
 async function getProject(slug: string): Promise<Project | null> {
   const { data, error } = await supabase
@@ -17,14 +28,28 @@ async function getProject(slug: string): Promise<Project | null> {
     .single();
 
   if (error || !data) return null;
-  const project = data as Project;
+  let project = data as Project;
+
+  if (slug === "kri-automation" && project.case_study_content) {
+    project = {
+      ...project,
+      case_study_content: project.case_study_content.replaceAll(
+        KRI_ROUTINE_REVIEW_OLD,
+        KRI_ROUTINE_REVIEW_NEW,
+      ),
+    };
+  }
+
   if (slug === "discover-dramaland") {
     const { data: row } = await supabase
       .from("settings")
       .select("value")
       .eq("key", DISCOVER_DRAMALAND_COMPETITIVE_SETTINGS_KEY)
       .maybeSingle();
-    return { ...project, competitive_landscape_content: row?.value ?? null };
+    return {
+      ...project,
+      competitive_landscape_content: settingsValueAsMarkdown(row?.value),
+    };
   }
   return project;
 }

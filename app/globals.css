@@ -43,6 +43,7 @@
 
 html {
   font-family: Inter, system-ui, sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -74,17 +75,20 @@ body {
   100%     { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Skills blob drop-bounce ── */
+/* ── Skills blob drop-bounce: slow fall, double bounce, then settle ── */
 @keyframes dropBounce {
-  0%   { opacity: 0; transform: var(--rot) translateY(-900px); }
-  60%  { opacity: 1; transform: var(--rot) translateY(22px); }
-  75%  { transform: var(--rot) translateY(-10px); }
-  88%  { transform: var(--rot) translateY(6px); }
+  0%   { opacity: 0; transform: var(--rot) translateY(calc(-90vh - 180px)); }
+  36%  { opacity: 1; transform: var(--rot) translateY(54px); }
+  48%  { transform: var(--rot) translateY(-26px); }
+  58%  { transform: var(--rot) translateY(36px); }
+  68%  { transform: var(--rot) translateY(-14px); }
+  78%  { transform: var(--rot) translateY(12px); }
+  88%  { transform: var(--rot) translateY(-5px); }
   100% { opacity: 1; transform: var(--rot); }
 }
 
 .skill-blob.dropped {
-  animation: dropBounce 3.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: dropBounce 2.85s cubic-bezier(0.22, 0.72, 0.32, 1) forwards;
 }
 
 /* ── Hide scrollbar on carousel ── */

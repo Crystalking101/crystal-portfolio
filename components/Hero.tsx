@@ -75,7 +75,7 @@ export default function Hero() {
           lineHeight: 1.8,
           margin: 0,
         }}>
-          Builder first. PM second. The order matters. Ex–American Express.
+          Builder first. PM second. The order matters.
         </p>
       </section>
     );
@@ -159,7 +159,7 @@ export default function Hero() {
             whiteSpace: "nowrap",
             margin: 0,
           }}>
-            Builder first. PM second. The order matters. Ex–American Express.
+            Builder first. PM second. The order matters.
           </p>
         </div>
 
