@@ -113,26 +113,6 @@ function ProteinSubNav({ isMobile }: { isMobile: boolean }) {
     </div>
   );
 
-  const cta = (
-    <a
-      href="mailto:king.d.crystal@gmail.com"
-      style={{
-        flexShrink: 0,
-        fontFamily: "Inter, system-ui, sans-serif",
-        fontSize: isMobile ? "11px" : "12px",
-        fontWeight: 600,
-        color: "#FFFFFF",
-        background: "#0F0F0F",
-        textDecoration: "none",
-        padding: isMobile ? "7px 10px" : "8px 14px",
-        borderRadius: "4px",
-        whiteSpace: "nowrap",
-      }}
-    >
-      Get in touch →
-    </a>
-  );
-
   const brand = (
     <span
       style={{
@@ -178,13 +158,11 @@ function ProteinSubNav({ isMobile }: { isMobile: boolean }) {
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
                 gap: "10px",
                 marginBottom: "10px",
               }}
             >
               {brand}
-              {cta}
             </div>
             {linkRow}
           </>
@@ -193,13 +171,11 @@ function ProteinSubNav({ isMobile }: { isMobile: boolean }) {
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
               gap: "12px",
             }}
           >
             {brand}
             <div style={{ flex: 1, minWidth: 0, display: "flex", justifyContent: "center" }}>{linkRow}</div>
-            {cta}
           </div>
         )}
       </div>
