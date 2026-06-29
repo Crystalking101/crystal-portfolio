@@ -305,6 +305,60 @@ export default function ProjectCard({ project, width, isMobile, fillGrid, blueHo
     );
   }
 
+  /** Image-only card; asset in `/public/inkbook-card.png`. Rose theme to match `card_theme: rose`. */
+  if (slug === "inkbook") {
+    const cardWidth = fillGrid
+      ? "100%"
+      : isMobile
+        ? MOBILE_CAROUSEL_W
+        : `${width ?? CARD_W}px`;
+    const minW = fillGrid ? 0 : cardWidth;
+    return (
+      <a
+        href="/work/inkbook"
+        style={{
+          position: "relative",
+          display: "block",
+          width: cardWidth,
+          minWidth: minW,
+          maxWidth: fillGrid ? "100%" : undefined,
+          aspectRatio: IMG_ASPECT,
+          borderRadius: "14px",
+          overflow: "hidden",
+          textDecoration: "none",
+          scrollSnapAlign: fillGrid ? undefined : "start",
+          transition: "transform 0.2s, border-color 0.2s",
+          flexShrink: fillGrid ? 1 : 0,
+          border: "1px solid #E8B4B8",
+          background: "#FAF6F0",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-4px)";
+          if (blueHoverBorder) e.currentTarget.style.borderColor = "#2D6FE8";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          if (blueHoverBorder) e.currentTarget.style.borderColor = "#E8B4B8";
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/inkbook-card.png"
+          alt="InkBook — Mandarin tone ear training app"
+          style={{
+            position: "absolute",
+            left: "5%",
+            top: "5%",
+            width: "90%",
+            height: "90%",
+            objectFit: "contain",
+            objectPosition: "center",
+          }}
+        />
+      </a>
+    );
+  }
+
   /** Image-only card; asset in `/public/Snacker-card2.png`. Mint theme to match `card_theme: mint`. */
   if (slug === "protein-snacker") {
     const cardWidth = fillGrid
