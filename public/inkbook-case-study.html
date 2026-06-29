@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>InkBook Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── Reset & base ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #FAF6F0; }
+
+/* ─── Hero ─────────────────────────────────────────────────────── */
+.hero {
+  background: #FAF6F0;
+  background-image:
+    repeating-linear-gradient(180deg, transparent, transparent 27px, rgba(139,0,0,0.06) 28px);
+  padding: 80px 32px 72px;
+  border-bottom: 1px solid rgba(26,26,26,0.08);
+}
+.hero-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(139,0,0,0.08);
+  border: 1px solid rgba(139,0,0,0.2);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #8B0000;
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(44px, 6.5vw, 72px);
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+.hero-title span {
+  display: block;
+  font-size: clamp(20px, 3vw, 30px);
+  color: #8B0000;
+  letter-spacing: 3px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+.hero-tagline {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(16px, 2.2vw, 21px);
+  color: #4A4540;
+  font-style: italic;
+  margin: 18px 0 18px;
+}
+.hero-desc {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  color: #5A5550;
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+/* ─── Subnav ────────────────────────────────────────────────────── */
+.subnav {
+  position: sticky;
+  top: 0;
+  z-index: 45;
+  background: #FAF6F0;
+  border-bottom: 1px solid rgba(26,26,26,0.1);
+}
+.subnav-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.subnav-brand {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #8B0000;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.subnav-links {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  overflow-x: auto;
+}
+.subnav-links a {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6B6558;
+  text-decoration: none;
+  padding: 7px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.subnav-links a:hover { color: #8B0000; background: rgba(139,0,0,0.08); }
+
+/* ─── Page body ─────────────────────────────────────────────────── */
+.page-body {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 40px 32px 96px;
+  display: grid;
+  grid-template-columns: 236px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────────── */
+.sidebar { position: sticky; top: 80px; }
+.sidebar-card {
+  background: #F1EBDD;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(26,26,26,0.08);
+}
+.sidebar-project-label {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #8B0000;
+  margin-bottom: 6px;
+}
+.sidebar-project-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1A1A1A;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.sidebar-row { margin-bottom: 16px; }
+.sidebar-row:last-child { margin-bottom: 0; }
+.sidebar-key {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #9B9286;
+  margin-bottom: 4px;
+}
+.sidebar-value {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: #3A3430;
+  line-height: 1.45;
+}
+.sidebar-divider { height: 1px; background: rgba(26,26,26,0.1); margin: 16px 0; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.tag {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(139,0,0,0.08);
+  color: #8B0000;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+.tag-neutral { background: rgba(26,26,26,0.06); color: #4A4540; }
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #8B0000;
+  background: rgba(139,0,0,0.08);
+  border-radius: 100px;
+  padding: 4px 10px;
+}
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #8B0000; }
+.sidebar-link {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8B0000;
+  text-decoration: none;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(139,0,0,0.06);
+  border-radius: 8px;
+  text-align: center;
+}
+.sidebar-link:hover { background: rgba(139,0,0,0.12); }
+
+/* ─── Main content ──────────────────────────────────────────────── */
+.main-content { min-width: 0; }
+.section { margin-bottom: 56px; scroll-margin-top: 100px; }
+.section-divider { height: 1px; background: rgba(26,26,26,0.08); margin-bottom: 32px; }
+.section-eyebrow {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #8B0000;
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  color: #1A1A1A;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  color: #4A4540;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+.section-body:last-child { margin-bottom: 0; }
+
+/* ─── Pull quote ────────────────────────────────────────────────── */
+.pull-quote {
+  border-left: 3px solid #8B0000;
+  padding: 16px 20px;
+  margin: 24px 0;
+  background: rgba(139,0,0,0.04);
+  border-radius: 0 8px 8px 0;
+}
+.pull-quote p {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 17px;
+  color: #8B0000;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ─── Image placeholder ─────────────────────────────────────────── */
+.image-placeholder {
+  border: 2px dashed rgba(139,0,0,0.3);
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: #8B0000;
+  background: rgba(139,0,0,0.03);
+  margin: 20px 0;
+}
+.image-caption {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: #9B9286;
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ─── Persona cards ─────────────────────────────────────────────── */
+.persona-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+.persona-card {
+  background: #F1EBDD;
+  border-radius: 12px;
+  padding: 22px;
+}
+.persona-label {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8B0000;
+  margin-bottom: 8px;
+}
+.persona-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 10px;
+}
+.persona-desc {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: #5A5550;
+  line-height: 1.6;
+}
+
+/* ─── Features MoSCoW ───────────────────────────────────────────── */
+.moscow-block { margin: 24px 0; }
+.moscow-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+.moscow-must { background: rgba(139,0,0,0.1); color: #8B0000; }
+.moscow-should { background: rgba(45,106,79,0.1); color: #2D6A4F; }
+.moscow-wont { background: rgba(26,26,26,0.07); color: #6B6558; }
+.feature-item {
+  background: #F1EBDD;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+}
+.feature-item-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 4px;
+}
+.feature-item-desc {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: #5A5550;
+  line-height: 1.6;
+}
+.wont-list { list-style: none; }
+.wont-item {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: #6B6558;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(26,26,26,0.07);
+}
+.wont-item:last-child { border-bottom: none; }
+
+/* ─── Tech callout ──────────────────────────────────────────────── */
+.tech-stack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.tech-pill {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  background: #1A1A1A;
+  color: #FAF6F0;
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+
+/* ─── Roadmap list ──────────────────────────────────────────────── */
+.roadmap-list { list-style: none; margin-top: 20px; }
+.roadmap-item { display: flex; gap: 20px; margin-bottom: 24px; align-items: flex-start; }
+.roadmap-num {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: rgba(139,0,0,0.25);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 36px;
+}
+.roadmap-content-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 4px;
+}
+.roadmap-content-desc {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: #6B6558;
+  line-height: 1.6;
+}
+
+/* ─── CTA block ─────────────────────────────────────────────────── */
+.cta-block {
+  margin-top: 64px;
+  padding: 40px;
+  background: #F1EBDD;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(139,0,0,0.1);
+}
+.cta-block h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 12px;
+}
+.cta-block p {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  color: #6B6558;
+  margin-bottom: 24px;
+}
+.cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-btn-primary {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #FAF6F0;
+  background: #8B0000;
+  padding: 11px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.cta-btn-secondary {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8B0000;
+  background: rgba(139,0,0,0.08);
+  padding: 11px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ─── Hero ──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Hackathon Project · Microsoft Agents League · June 2026</div>
+    <h1 class="hero-title">
+      InkBook
+      <span>墨 书</span>
+    </h1>
+    <p class="hero-tagline">Master Mandarin, One Tone at a Time.</p>
+    <p class="hero-desc">
+      A Mandarin tone ear training web app powered by an AI Tone Coach Agent, built for learners
+      who fell in love with the language through Chinese and Korean dramas.
+    </p>
+  </div>
+</section>
+
+<!-- ─── Subnav ────────────────────────────────────────────────── -->
+<nav class="subnav">
+  <div class="subnav-inner">
+    <span class="subnav-brand">InkBook 墨书</span>
+    <div class="subnav-links">
+      <a href="#problem">Problem</a>
+      <a href="#market">Market</a>
+      <a href="#users">Users</a>
+      <a href="#solution">Solution</a>
+      <a href="#design">Design</a>
+      <a href="#features">Features</a>
+      <a href="#technical">Technical</a>
+      <a href="#outcome">Outcome</a>
+      <a href="#roadmap">Roadmap</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Page body ─────────────────────────────────────────────── -->
+<div class="page-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-project-label">Case Study</div>
+      <div class="sidebar-project-name">InkBook 墨书</div>
+
+      <div class="sidebar-row">
+        <div class="sidebar-key">Role</div>
+        <div class="sidebar-value">Founder &amp; Product Manager</div>
+      </div>
+
+      <div class="sidebar-row">
+        <div class="sidebar-key">Timeline</div>
+        <div class="sidebar-value">June 2026</div>
+      </div>
+
+      <div class="sidebar-row">
+        <div class="sidebar-key">Type</div>
+        <div class="sidebar-value">Hackathon Project · Web App</div>
+      </div>
+
+      <div class="sidebar-row">
+        <div class="sidebar-key">Event</div>
+        <div class="sidebar-value">Microsoft Agents League Hackathon</div>
+      </div>
+
+      <div class="sidebar-row">
+        <div class="sidebar-key">Track</div>
+        <div class="sidebar-value">Creative Apps · Hack for Good</div>
+      </div>
+
+      <div class="sidebar-row">
+        <div class="sidebar-key">Status</div>
+        <div>
+          <span class="status-badge">
+            <span class="status-dot"></span>
+            Submitted
+          </span>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-row">
+        <div class="sidebar-key">Stack</div>
+        <div class="tag-row">
+          <span class="tag">Next.js 14</span>
+          <span class="tag">Tailwind CSS</span>
+          <span class="tag">Azure Speech</span>
+          <span class="tag">OpenRouter</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Web Speech API</span>
+        </div>
+      </div>
+
+      <div class="sidebar-row">
+        <div class="sidebar-key">Focus</div>
+        <div class="tag-row">
+          <span class="tag tag-neutral">0-to-1 Build</span>
+          <span class="tag tag-neutral">EdTech</span>
+          <span class="tag tag-neutral">AI Coaching</span>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <a class="sidebar-link" href="https://inkbook-three.vercel.app" target="_blank" rel="noopener">View Live App →</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Problem -->
+    <section class="section" id="problem">
+      <div class="section-eyebrow">The Problem</div>
+      <h2 class="section-title">Mandarin's tone system has no real teacher online</h2>
+      <p class="section-body">
+        Over 1.5 billion people are learning a language globally, and Mandarin Chinese is the most
+        spoken native language in the world. Yet it remains one of the hardest for English speakers
+        to learn primarily because of its 4-tone and 1 neutral system, where the same syllable means
+        entirely different things depending on pitch contour. Most existing apps were built for
+        European languages and awkwardly adapted for Mandarin. None of them provide real-time,
+        personalized feedback on why a tone is wrong and how to fix it.
+      </p>
+    </section>
+
+    <!-- Market -->
+    <div class="section-divider"></div>
+    <section class="section" id="market">
+      <div class="section-eyebrow">Market Opportunity</div>
+      <h2 class="section-title">A $11B+ Mandarin learning market with an overlooked beginner problem</h2>
+      <p class="section-body">
+        The global Mandarin learning market exceeds $10 billion and continues to grow as learners
+        turn to mobile and AI-powered education.
+      </p>
+      <p class="section-body">
+        While apps like Duolingo and HelloChinese focus on vocabulary, grammar, and gamification,
+        beginners consistently struggle with one critical skill, hearing Mandarin tones correctly.
+        A word spoken with the wrong tone can have a completely different meaning, yet few products
+        are dedicated to tone ear training and listening confidence.
+      </p>
+      <p class="section-body">
+        The demand is growing. The pain point is universal. But no category leader owns the tone
+        training space.
+      </p>
+      <p class="section-body">
+        InkBook helps learners hear Mandarin before they try to speak it, building confidence
+        through focused tone recognition and listening practice.
+      </p>
+    </section>
+
+    <!-- Users -->
+    <div class="section-divider"></div>
+    <section class="section" id="users">
+      <div class="section-eyebrow">Users</div>
+      <h2 class="section-title">Built for a learner most apps overlook</h2>
+      <p class="section-body">
+        InkBook is built for a specific kind of learner that most Mandarin apps overlook.
+      </p>
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="persona-label">Primary</div>
+          <div class="persona-name">The Drama Learner</div>
+          <div class="persona-desc">
+            Adult beginner ages 18 to 35 who came to Mandarin through Chinese or Korean drama
+            content. Motivated, emotionally invested, and wants a practical way to practice tones
+            without feeling overwhelmed.
+          </div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-label">Secondary</div>
+          <div class="persona-name">The Frustrated Beginner</div>
+          <div class="persona-desc">
+            Any English speaking adult beginner who has tried Duolingo or Rosetta Stone and wants
+            focused tone practice that those apps do not provide.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution -->
+    <div class="section-divider"></div>
+    <section class="section" id="solution">
+      <div class="section-eyebrow">The Solution</div>
+      <h2 class="section-title">A personal Mandarin tutor, available 24/7</h2>
+      <p class="section-body">
+        InkBook is a Mandarin tone ear training web app powered by an AI Tone Coach Agent. It uses
+        Azure Speech Services for real-time pronunciation scoring and listens to how a user
+        pronounces a Mandarin tone. InkBook tells the user exactly what went wrong, and coaches
+        them on how to fix it. Think of InkBook as a personal Mandarin tutor available 24/7.
+      </p>
+      <div class="pull-quote">
+        <p>Every other app tells you that you're wrong. InkBook tells you why, and shows you how to sound like you belong in the drama.</p>
+      </div>
+    </section>
+
+    <!-- Design -->
+    <div class="section-divider"></div>
+    <section class="section" id="design">
+      <div class="section-eyebrow">Design</div>
+      <h2 class="section-title">A personal study journal, not a gamified app</h2>
+      <p class="section-body">
+        InkBook was designed to feel like opening a personal study journal, not logging into
+        another gamified app. The aesthetic is notebook and journal, lined paper texture,
+        handwritten feel headers. This is a deliberate departure from Duolingo's loud, cartoonish
+        energy. Learning a language tied to deep personal meaning, like a love of Chinese dramas,
+        deserves a calmer and more intentional visual world.
+      </p>
+      <p class="section-body">
+        The color palette reflects that intention. A warm cream background reads like aged
+        notebook paper. A deep red accent carries real cultural significance in Chinese tradition.
+        Deep ink black text and a forest green success state complete a palette that feels
+        considered rather than decorative.
+      </p>
+      <p class="section-body">
+        Typography pairs Playfair Display for headers, elegant and literary, with Plus Jakarta
+        Sans for body text, clean and easy to read. Every tone is paired with an SVG pitch contour
+        diagram showing the actual shape of the sound, flat, rising, dipping, or falling, so the
+        visual learning reinforces the audio learning.
+      </p>
+      <img src="/design_1.png" alt="InkBook design inspiration — moodboard, color palette, and app screens" style="width: 100%; border-radius: 12px; margin-top: 20px; display: block;" />
+      <p class="section-eyebrow" style="margin-top: 28px; font-size: 13px; letter-spacing: 1px;">InkBook App Screens — Name Generator and Study Hall</p>
+      <img src="/inkbook_design2.png" alt="InkBook app screens — name generator and study hall" style="width: 100%; border-radius: 12px; margin-top: 20px; display: block;" />
+      <p class="section-eyebrow" style="margin-top: 28px; font-size: 13px; letter-spacing: 1px;">InkBook App Screens — Pinyin Guide, Recording Flow, and Tone Scoring</p>
+      <p class="section-body">Every screen in InkBook was designed to feel warm, focused, and culturally grounded, from the Pinyin guide cards to the recording flow and the Azure Speech scoring result. The forest green success state, cream background, and deep red accents work together to make feedback feel encouraging rather than clinical.</p>
+      <img src="/inkbook_design3.png" alt="InkBook app screens — Pinyin guide, pronouns, recording flow, and tone scoring" style="width: 100%; border-radius: 12px; margin-top: 20px; display: block;" />
+    </section>
+
+    <!-- Features -->
+    <div class="section-divider"></div>
+    <section class="section" id="features">
+      <div class="section-eyebrow">Features</div>
+      <h2 class="section-title">Scoped with a strict MoSCoW framework</h2>
+      <p class="section-body">
+        InkBook was scoped using a strict MoSCoW framework for a 6 day build window. Every
+        decision below was deliberate.
+      </p>
+
+      <div class="moscow-block">
+        <span class="moscow-label moscow-must">Must Have — Shipped for submission</span>
+        <div class="feature-item">
+          <div class="feature-item-title">Chinese Name Generator</div>
+          <div class="feature-item-desc">The user types their English name and receives a Mandarin equivalent with characters, Pinyin, and audio playback. This is the emotional entry point of the entire app.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-title">4 Tone Introduction</div>
+          <div class="feature-item-desc">A visual and audio introduction to all 4 Mandarin tones plus the neutral tone, with Pinyin notation and tone curve diagrams.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-title">Tone Recording and Azure Speech Scoring</div>
+          <div class="feature-item-desc">The user records a tone attempt, Azure Speech scores it, and the AI Tone Coach Agent explains what went wrong and how to fix it.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-title">Cultural Drama Scene Context</div>
+          <div class="feature-item-desc">Each tone is anchored to a short drama scene reference or cultural moment to make the learning memorable and personal.</div>
+        </div>
+      </div>
+
+      <div class="moscow-block">
+        <span class="moscow-label moscow-should">Should Have — Built if time allowed</span>
+        <div class="feature-item">
+          <div class="feature-item-title">Encouragement Voice</div>
+          <div class="feature-item-desc">The AI responds to a practice attempt in both English and Mandarin to keep the learner immersed.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-title">Weak Spot Tracking</div>
+          <div class="feature-item-desc">The AI tracks which tones the user struggles with most in session and serves more practice on those specific tones.</div>
+        </div>
+      </div>
+
+      <div class="moscow-block">
+        <span class="moscow-label moscow-wont">Won't Have — Explicitly out of scope</span>
+        <ul class="wont-list">
+          <li class="wont-item">No mobile app. Web responsive only for this submission.</li>
+          <li class="wont-item">No full Mandarin curriculum. Tone training only, by design.</li>
+          <li class="wont-item">No social or community features.</li>
+          <li class="wont-item">No paid subscription or monetization.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Technical -->
+    <div class="section-divider"></div>
+    <section class="section" id="technical">
+      <div class="section-eyebrow">Technical</div>
+      <h2 class="section-title">Performance and privacy as hard requirements</h2>
+      <p class="section-body">
+        InkBook was built on Next.js 14 with Tailwind CSS for a fully mobile responsive experience.
+        GitHub Copilot was used throughout development to assist code generation, a requirement
+        for the Creative Apps track.
+      </p>
+      <p class="section-body">
+        Azure Speech Services handles both pronunciation scoring and text to speech playback, the
+        core technical engine behind the entire learning experience. The Web Speech API provides
+        browser native microphone access with no installation required, the user simply opens the
+        app and starts speaking.
+      </p>
+      <p class="section-body">
+        OpenRouter, using an LLM API, powers the AI coaching layer that turns a raw pronunciation
+        score into a specific, personalized explanation of what went wrong and how to fix it.
+        Supabase stores tone vocabulary, cultural context cards, and drama scene references. No
+        user voice data is ever written to persistent storage. Audio is processed in memory and
+        discarded immediately after scoring.
+      </p>
+      <p class="section-body">
+        Performance and privacy were both treated as hard requirements rather than nice to haves.
+        Azure Speech scoring was required to complete within 2 seconds of recording submission to
+        maintain a natural practice flow, and the app was built to meet WCAG 2.1 AA accessibility
+        standards for color contrast and keyboard navigation.
+      </p>
+      <div class="tech-stack-row">
+      </div>
+    </section>
+
+    <!-- Outcome -->
+    <div class="section-divider"></div>
+    <section class="section" id="outcome">
+      <div class="section-eyebrow">Outcome</div>
+      <h2 class="section-title">Shipped, submitted, and fully functional</h2>
+      <p class="section-body">
+        InkBook was built and submitted to the Microsoft Agents League Hackathon in a 6 day build
+        window, under both the Creative Apps and Hack for Good tracks. As a solo founder and
+        product manager, Crystal owned the full process, product strategy, design, and AI
+        integration.
+      </p>
+      <p class="section-body">
+        The app is fully functional. The name generator runs, the tone introduction plays native
+        audio with visual pitch curves, and the Azure Speech scoring pipeline returns a real score
+        from real microphone input, paired with AI coaching feedback.
+      </p>
+
+      <div style="margin-top: 28px;">
+        <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 600; color: #8B0000; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Product Demo</p>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
+          <iframe
+            src="https://www.youtube.com/embed/7658DqZ3y4A"
+            title="InkBook Demo — Microsoft Agents League Hackathon"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap -->
+    <div class="section-divider"></div>
+    <section class="section" id="roadmap">
+      <div class="section-eyebrow">What Is Coming Next</div>
+      <h2 class="section-title">Roadmap</h2>
+      <p class="section-body">
+        What comes next for InkBook, explicitly out of scope for the hackathon submission but
+        worth building toward.
+      </p>
+      <ul class="roadmap-list">
+        <li class="roadmap-item">
+          <span class="roadmap-num">01</span>
+          <div>
+            <div class="roadmap-content-title">User accounts and progress history</div>
+            <div class="roadmap-content-desc">Track tone improvement over time across sessions instead of starting fresh every visit.</div>
+          </div>
+        </li>
+        <li class="roadmap-item">
+          <span class="roadmap-num">02</span>
+          <div>
+            <div class="roadmap-content-title">Leaderboard and streak gamification</div>
+            <div class="roadmap-content-desc">Build the kind of daily habit loop that makes tone practice stick.</div>
+          </div>
+        </li>
+        <li class="roadmap-item">
+          <span class="roadmap-num">03</span>
+          <div>
+            <div class="roadmap-content-title">Character writing practice</div>
+            <div class="roadmap-content-desc">Extend the app beyond listening and speaking into reading and writing.</div>
+          </div>
+        </li>
+        <li class="roadmap-item">
+          <span class="roadmap-num">04</span>
+          <div>
+            <div class="roadmap-content-title">Drama vocabulary packs</div>
+            <div class="roadmap-content-desc">Let learners practice tones using vocabulary pulled directly from the dramas that brought them to Mandarin in the first place.</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <h3>InkBook is live and open</h3>
+      <p>Try the app at inkbook-three.vercel.app or explore the full codebase on GitHub.</p>
+      <div class="cta-buttons">
+        <a class="cta-btn-primary" href="https://inkbook-three.vercel.app" target="_blank" rel="noopener">Try InkBook →</a>
+        <a class="cta-btn-secondary" href="/">See all projects</a>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /page-body -->
+
+</body>
+</html>
