@@ -33,6 +33,32 @@ export const WORK_PROJECT_PLACEHOLDERS: Project[] = [
 /** Shown when Supabase has no published side projects. */
 export const SIDE_PROJECT_PLACEHOLDERS: Project[] = [
   {
+    id: "placeholder-5",
+    created_at: "",
+    title: "FinTips",
+    company: "Side Project",
+    type: "side-project",
+    status: "live",
+    slug: "fintips",
+    tagline: "Free, anonymous AI-powered financial advice. No sign-up, no tracking, built in a week.",
+    description: "An AI-powered web app giving personalized money tips with no sign-up or tracking.",
+    stat_number: "1",
+    stat_label: "Week to launch",
+    stat_2_number: null,
+    stat_2_label: null,
+    stat_3_number: null,
+    stat_3_label: null,
+    year_start: "2025",
+    year_end: "2025",
+    tags: ["AI", "Fintech", "Web App"],
+    rose_tags: null,
+    card_theme: "cream",
+    case_study_content: null,
+    is_featured: false,
+    sort_order: 2,
+    published: true,
+  },
+  {
     id: "placeholder-2",
     created_at: "",
     title: "DiscoverDramaland",
@@ -133,5 +159,11 @@ export async function getPublishedSideProjects(): Promise<Project[]> {
     .order("sort_order", { ascending: true });
 
   if (error || !data || data.length === 0) return SIDE_PROJECT_PLACEHOLDERS;
-  return data as Project[];
+
+  const dbProjects = data as Project[];
+  const dbSlugs = new Set(dbProjects.map((p) => p.slug));
+
+  // Append any placeholder projects not already present in Supabase
+  const missing = SIDE_PROJECT_PLACEHOLDERS.filter((p) => !dbSlugs.has(p.slug));
+  return [...dbProjects, ...missing];
 }
