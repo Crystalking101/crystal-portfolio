@@ -33,39 +33,6 @@ export default function Hero() {
       >
         {/* ── Copy column ── */}
         <div style={{ padding: isMobile ? "0 20px 44px" : 0 }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "7px",
-              background: "rgba(232,180,184,0.1)",
-              border: "1px solid rgba(232,180,184,0.25)",
-              borderRadius: "20px",
-              padding: "4px 13px",
-              marginBottom: isMobile ? "32px" : "48px",
-            }}
-          >
-            <span
-              style={{
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                background: "#E8B4B8",
-                flexShrink: 0,
-              }}
-            />
-            <span
-              style={{
-                fontFamily: "Inter, system-ui, sans-serif",
-                fontSize: "12px",
-                color: "#E8B4B8",
-                fontWeight: 500,
-              }}
-            >
-              Open to PM opportunities
-            </span>
-          </div>
-
           <p
             style={{
               fontFamily: "Georgia, serif",
