@@ -50,7 +50,7 @@ export default function Nav() {
 
   const mobileNavItems: { href: string; label: string }[] = [
     { href: "/work", label: "Work" },
-    { href: "/projects", label: "Projects" },
+    { href: "/projects", label: "Products" },
     { href: "/about", label: "About" },
   ];
 
@@ -100,7 +100,7 @@ export default function Nav() {
               onMouseEnter={(e) => (e.currentTarget.style.color = "#0F0F0F")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
             >
-              Projects
+              Products
             </Link>
             <Link
               href="/about"

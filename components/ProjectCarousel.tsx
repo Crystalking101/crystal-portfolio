@@ -302,7 +302,7 @@ export default function ProjectCarousel({ workProjects, sideProjects }: TwoRowPr
       />
       <CarouselRow
         projects={sideProjects}
-        label="Side Projects"
+        label="Side Products"
         viewAllHref="/projects"
         showComingSoon={true}
         isMobile={isMobile}

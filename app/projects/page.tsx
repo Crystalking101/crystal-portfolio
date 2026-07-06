@@ -4,7 +4,7 @@ import { SingleCarousel } from "@/components/ProjectCarousel";
 import { getPublishedSideProjects } from "@/lib/portfolio-projects";
 
 export const metadata = {
-  title: "Projects — Crystal King",
+  title: "Products — Crystal King",
   description: "Side projects built independently — apps, tools, and experiments.",
 };
 
@@ -33,7 +33,7 @@ export default async function ProjectsPage() {
 
         {/* Carousel */}
         <div style={{ paddingBottom: "80px" }}>
-          <SingleCarousel projects={projects} label="All Projects" showComingSoon={true} blueHoverBorder={false} />
+          <SingleCarousel projects={projects} label="All Products" showComingSoon={true} blueHoverBorder={false} />
         </div>
       </main>
       <Footer />
