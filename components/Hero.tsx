@@ -95,7 +95,7 @@ export default function Hero() {
               fontSize: isMobile ? "13px" : "14px",
               fontWeight: 700,
               fontStyle: "italic",
-              color: "#E8B4B8",
+              color: "#E8E6E1",
               lineHeight: 1.75,
               margin: "48px 0 0",
               maxWidth: "420px",
