@@ -101,7 +101,7 @@ export default function Hero() {
               maxWidth: "420px",
             }}
           >
-            Every product I have built started with the same frustration. I was looking for a clear answer in a noisy category and the right tool did not exist. So I built it. That is when AI creates the most value, turning personal pain points into shipped products.
+            &ldquo;Every product I have built started with the same frustration. I was looking for a clear answer in a noisy category and the right tool did not exist. So I built it. That is when AI creates the most value, turning personal pain points into shipped products.&rdquo;
           </p>
         </div>
 
