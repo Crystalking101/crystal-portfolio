@@ -101,20 +101,6 @@ export default function IdeasLabPage() {
               The first drop will include a product teardown and a framework I use for scoping AI features. Check back soon.
             </p>
 
-            <a
-              href="https://www.linkedin.com/in/crystaldking"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                fontFamily: "Inter, system-ui, sans-serif",
-                fontSize: "14px",
-                fontWeight: 600,
-                color: "#B87A7E",
-                textDecoration: "none",
-              }}
-            >
-              Follow along on LinkedIn →
-            </a>
           </div>
         </section>
 
