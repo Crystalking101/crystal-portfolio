@@ -194,32 +194,6 @@ export default function Nav() {
           </div>
         )}
 
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            fontFamily: "Inter, system-ui, sans-serif",
-            fontSize: "13px",
-            fontWeight: 500,
-            color: "#FFFFFF",
-            background: "#B87A7E",
-            padding: "7px 16px",
-            borderRadius: "4px",
-            textDecoration: "none",
-            border: "1px solid rgba(255,255,255,0.2)",
-            transition: "background 0.15s, opacity 0.15s",
-            flexShrink: 0,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#9E656A";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "#B87A7E";
-          }}
-        >
-          Resume
-        </a>
       </div>
     </nav>
   );
