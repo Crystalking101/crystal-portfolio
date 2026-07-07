@@ -569,33 +569,35 @@ export default function ShortlistPage() {
               />
               <div style={{
                 background: INK,
-                borderRadius: "10px",
-                padding: "16px 20px",
+                borderRadius: "8px",
+                padding: "10px 14px",
                 marginBottom: "20px",
                 display: "flex",
-                gap: "10px",
+                gap: "8px",
                 alignItems: "flex-start",
+                border: `1px solid ${GREEN}`,
+                boxShadow: `0 0 8px rgba(0,255,133,0.15)`,
               }}>
                 <span style={{
                   fontFamily: "Inter, system-ui, sans-serif",
-                  fontSize: "12px",
+                  fontSize: "11px",
                   fontWeight: 700,
                   color: GREEN,
                   whiteSpace: "nowrap",
                   flexShrink: 0,
-                  lineHeight: 1.65,
+                  lineHeight: 1.6,
                 }}>
                   Note:
                 </span>
                 <p style={{
                   fontFamily: "Inter, system-ui, sans-serif",
-                  fontSize: "12px",
-                  color: "rgba(248,247,244,0.6)",
-                  lineHeight: 1.65,
+                  fontSize: "11px",
+                  color: "rgba(248,247,244,0.55)",
+                  lineHeight: 1.6,
                   margin: 0,
                 }}>
                   This output is based on a personalized candidate profile. Your results will reflect your own background, target roles, salary floor, and company preferences as configured in your{" "}
-                  <code style={{ color: BLUE, background: "rgba(0,102,255,0.12)", padding: "2px 5px", borderRadius: "3px" }}>config.py</code>{" "}
+                  <code style={{ color: BLUE, background: "rgba(0,102,255,0.12)", padding: "1px 4px", borderRadius: "3px" }}>config.py</code>{" "}
                   file. No two shortlists will look the same.
                 </p>
               </div>
