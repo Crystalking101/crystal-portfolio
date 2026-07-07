@@ -654,6 +654,43 @@ export default function ShortlistPage() {
                 gitignored config file so anyone can clone the repo, fill in their own profile, and run
                 it immediately without touching the core logic.
               </Body>
+
+              <div style={{ marginTop: "28px" }}>
+                <p style={{
+                  fontFamily: "Inter, system-ui, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: BLUE,
+                  textTransform: "uppercase",
+                  letterSpacing: "1px",
+                  marginBottom: "12px",
+                }}>
+                  Product Demo
+                </p>
+                <div style={{
+                  position: "relative",
+                  paddingBottom: "56.25%",
+                  height: 0,
+                  overflow: "hidden",
+                  borderRadius: "12px",
+                }}>
+                  <iframe
+                    src="https://www.youtube.com/embed/NwNO2xJbsWs"
+                    title="Shortlist Demo — AI Powered Job Scoring Tool"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "12px",
+                    }}
+                  />
+                </div>
+              </div>
             </section>
 
             <Divider />
