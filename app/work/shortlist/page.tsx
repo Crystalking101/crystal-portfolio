@@ -563,10 +563,42 @@ export default function ShortlistPage() {
                 style={{
                   width: "100%",
                   borderRadius: "12px",
-                  margin: "8px 0 20px",
+                  margin: "8px 0 12px",
                   border: `1px solid ${BORDER}`,
                 }}
               />
+              <div style={{
+                background: INK,
+                borderRadius: "10px",
+                padding: "16px 20px",
+                marginBottom: "20px",
+                display: "flex",
+                gap: "10px",
+                alignItems: "flex-start",
+              }}>
+                <span style={{
+                  fontFamily: "Inter, system-ui, sans-serif",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  color: GREEN,
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                  lineHeight: 1.65,
+                }}>
+                  Note:
+                </span>
+                <p style={{
+                  fontFamily: "Inter, system-ui, sans-serif",
+                  fontSize: "12px",
+                  color: "rgba(248,247,244,0.6)",
+                  lineHeight: 1.65,
+                  margin: 0,
+                }}>
+                  This output is based on a personalized candidate profile. Your results will reflect your own background, target roles, salary floor, and company preferences as configured in your{" "}
+                  <code style={{ color: BLUE, background: "rgba(0,102,255,0.12)", padding: "2px 5px", borderRadius: "3px" }}>config.py</code>{" "}
+                  file. No two shortlists will look the same.
+                </p>
+              </div>
             </section>
 
             <Divider />
