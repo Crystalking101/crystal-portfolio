@@ -143,6 +143,181 @@ export default function ProjectCard({ project, width, isMobile, fillGrid, blueHo
 
   const theme = card_theme ?? "cream";
 
+  /** Custom terminal + keyboard card for Shortlist. */
+  if (slug === "shortlist") {
+    const cardWidth = fillGrid ? "100%" : isMobile ? MOBILE_CAROUSEL_W : `${width ?? CARD_W}px`;
+    const minW = fillGrid ? 0 : cardWidth;
+
+    const keyRows = [
+      ["Q","W","E","R","T","Y","U","I","O","P"],
+      ["A","S","D","F","G","H","J","K","L"],
+      ["Z","X","C","V","B","N","M"],
+    ];
+
+    const keyBase: React.CSSProperties = {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "#1E2535",
+      borderRadius: "4px",
+      borderBottom: "2px solid rgba(0,0,0,0.4)",
+      fontFamily: "monospace",
+      fontSize: "9px",
+      color: "rgba(255,255,255,0.45)",
+      height: "26px",
+      flex: 1,
+      userSelect: "none",
+    };
+
+    return (
+      <a
+        href="/work/shortlist"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: cardWidth,
+          minWidth: minW,
+          maxWidth: fillGrid ? "100%" : undefined,
+          aspectRatio: IMG_ASPECT,
+          borderRadius: "16px",
+          overflow: "hidden",
+          textDecoration: "none",
+          scrollSnapAlign: fillGrid ? undefined : "start",
+          transition: "transform 0.2s, border-color 0.2s",
+          flexShrink: fillGrid ? 1 : 0,
+          background: "#0F1117",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxSizing: "border-box",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-4px)";
+          if (blueHoverBorder) e.currentTarget.style.borderColor = "#2D6FE8";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          if (blueHoverBorder) e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+        }}
+      >
+        {/* Terminal window */}
+        <div style={{
+          background: "#1A1F2E",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          padding: "14px 16px 12px",
+          flexShrink: 0,
+        }}>
+          {/* Traffic lights */}
+          <div style={{ display: "flex", gap: "6px", marginBottom: "10px" }}>
+            {["#FF5F57","#FEBC2E","#28C840"].map((c) => (
+              <span key={c} style={{ width: "10px", height: "10px", borderRadius: "50%", background: c, display: "inline-block" }} />
+            ))}
+          </div>
+          {/* Path */}
+          <p style={{ fontFamily: "monospace", fontSize: "11px", color: "rgba(255,255,255,0.35)", margin: "0 0 4px", letterSpacing: "0.2px" }}>
+            ~/shortlist
+          </p>
+          {/* Command */}
+          <p style={{ fontFamily: "monospace", fontSize: "11px", margin: "0 0 4px" }}>
+            <span style={{ color: "rgba(255,255,255,0.35)" }}>$ </span>
+            <span style={{ color: "#0066FF" }}>python3 shortlist.py</span>
+          </p>
+          {/* Output */}
+          <p style={{ fontFamily: "monospace", fontSize: "11px", color: "#00FF85", margin: 0 }}>
+            ✓ 6 roles ready to review
+          </p>
+        </div>
+
+        {/* Title row */}
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "14px 16px 12px",
+          flexShrink: 0,
+        }}>
+          <span style={{
+            fontFamily: "var(--font-playfair, Georgia, serif)",
+            fontSize: "22px",
+            fontWeight: 700,
+            color: "#F8F7F4",
+            letterSpacing: "-0.3px",
+          }}>
+            Shortlist
+          </span>
+          <span style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "6px",
+            background: "rgba(0,255,133,0.1)",
+            borderRadius: "100px",
+            padding: "4px 12px",
+            fontFamily: "Inter, system-ui, sans-serif",
+            fontSize: "11px",
+            fontWeight: 600,
+            color: "#00CC6A",
+          }}>
+            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#00FF85", display: "inline-block" }} />
+            Open Source
+          </span>
+        </div>
+
+        {/* Keyboard */}
+        <div style={{
+          flex: 1,
+          padding: "0 12px 12px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+        }}>
+          <div style={{
+            background: "#141922",
+            borderRadius: "10px",
+            border: "1px solid rgba(255,255,255,0.06)",
+            padding: "10px 10px 8px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "5px",
+          }}>
+            {keyRows.map((row, ri) => (
+              <div key={ri} style={{ display: "flex", gap: "4px", justifyContent: "center" }}>
+                {row.map((k) => {
+                  const isD = k === "D" && ri === 1;
+                  return (
+                    <div key={k} style={{
+                      ...keyBase,
+                      background: isD ? "#0066FF" : "#1E2535",
+                      color: isD ? "#FFFFFF" : "rgba(255,255,255,0.45)",
+                      fontWeight: isD ? 700 : undefined,
+                    }}>
+                      {k}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+            {/* Bottom row */}
+            <div style={{ display: "flex", gap: "4px" }}>
+              <div style={{ ...keyBase, flex: "0 0 32px" }}>⌘</div>
+              <div style={{
+                ...keyBase,
+                flex: 1,
+                background: "#00FF85",
+                color: "#0A0A0A",
+                fontFamily: "Inter, system-ui, sans-serif",
+                fontSize: "11px",
+                fontWeight: 700,
+                letterSpacing: "0.5px",
+                borderBottom: "2px solid rgba(0,0,0,0.3)",
+              }}>
+                ENTER
+              </div>
+              <div style={{ ...keyBase, flex: "0 0 32px" }}>⌥</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    );
+  }
+
   /** Image-only card; asset in `/public/Tips.png`. Fills fixed aspect (~same footprint as text cards). */
   if (slug === "fintips") {
     const cardWidth = fillGrid
