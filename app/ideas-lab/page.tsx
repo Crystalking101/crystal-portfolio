@@ -52,16 +52,6 @@ export default function IdeasLabPage() {
               Where I think out loud.
             </h1>
 
-            <p style={{
-              fontFamily: "Inter, system-ui, sans-serif",
-              fontSize: "15px",
-              color: "#777",
-              lineHeight: 1.7,
-              marginBottom: "28px",
-            }}>
-              Product teardowns, frameworks, and half-formed opinions. Updated as I build.
-            </p>
-
             <span style={{
               display: "inline-block",
               fontFamily: "Inter, system-ui, sans-serif",
