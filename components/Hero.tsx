@@ -80,7 +80,7 @@ export default function Hero() {
           <p
             style={{
               fontFamily: "Inter, system-ui, sans-serif",
-              fontSize: isMobile ? "14px" : "17px",
+              fontSize: isMobile ? "14px" : "24px",
               color: isMobile ? "#555" : "#777",
               lineHeight: 1.8,
               whiteSpace: isMobile ? "normal" : "nowrap",
