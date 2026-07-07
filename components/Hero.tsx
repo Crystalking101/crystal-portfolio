@@ -91,11 +91,13 @@ export default function Hero() {
           </p>
           <p
             style={{
-              fontFamily: "Inter, system-ui, sans-serif",
+              fontFamily: "Georgia, serif",
               fontSize: isMobile ? "13px" : "14px",
+              fontWeight: 700,
+              fontStyle: "italic",
               color: "#E8B4B8",
               lineHeight: 1.75,
-              margin: "32px 0 0",
+              margin: "48px 0 0",
               maxWidth: "420px",
             }}
           >
