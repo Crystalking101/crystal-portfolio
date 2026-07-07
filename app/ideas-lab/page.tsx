@@ -12,49 +12,6 @@ export default function IdeasLabPage() {
       <Nav />
       <main style={{ flex: 1 }}>
 
-        {/* Hero */}
-        <section style={{
-          background: "#0F0F0F",
-          width: "100%",
-          padding: "80px 40px",
-          boxSizing: "border-box",
-        }}>
-          <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-            <p style={{
-              fontFamily: "Inter, system-ui, sans-serif",
-              fontSize: "11px",
-              fontWeight: 700,
-              letterSpacing: "2px",
-              textTransform: "uppercase",
-              color: "#2D6FE8",
-              marginBottom: "20px",
-            }}>
-              Ideas Lab
-            </p>
-            <h1 style={{
-              fontFamily: "var(--font-playfair), Georgia, serif",
-              fontSize: "clamp(36px, 5vw, 64px)",
-              fontWeight: 700,
-              color: "#FFFFFF",
-              letterSpacing: "-1px",
-              lineHeight: 1.1,
-              marginBottom: "20px",
-            }}>
-              Where I think out loud.
-            </h1>
-            <p style={{
-              fontFamily: "Inter, system-ui, sans-serif",
-              fontSize: "16px",
-              color: "rgba(255,255,255,0.5)",
-              lineHeight: 1.7,
-              maxWidth: "520px",
-              margin: 0,
-            }}>
-              Product teardowns, frameworks, and half-formed opinions. Updated as I build.
-            </p>
-          </div>
-        </section>
-
         {/* Coming Soon */}
         <section style={{
           background: "#F8F7F4",
@@ -71,6 +28,40 @@ export default function IdeasLabPage() {
             width: "100%",
             textAlign: "center",
           }}>
+            <p style={{
+              fontFamily: "Inter, system-ui, sans-serif",
+              fontSize: "11px",
+              fontWeight: 700,
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              color: "#2D6FE8",
+              marginBottom: "16px",
+            }}>
+              Ideas Lab
+            </p>
+
+            <h1 style={{
+              fontFamily: "var(--font-playfair), Georgia, serif",
+              fontSize: "clamp(32px, 5vw, 52px)",
+              fontWeight: 700,
+              color: "#0F0F0F",
+              letterSpacing: "-1px",
+              lineHeight: 1.1,
+              marginBottom: "14px",
+            }}>
+              Where I think out loud.
+            </h1>
+
+            <p style={{
+              fontFamily: "Inter, system-ui, sans-serif",
+              fontSize: "15px",
+              color: "#777",
+              lineHeight: 1.7,
+              marginBottom: "28px",
+            }}>
+              Product teardowns, frameworks, and half-formed opinions. Updated as I build.
+            </p>
+
             <span style={{
               display: "inline-block",
               fontFamily: "Inter, system-ui, sans-serif",
