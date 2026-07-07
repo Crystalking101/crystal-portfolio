@@ -84,10 +84,22 @@ export default function Hero() {
               color: isMobile ? "#555" : "#777",
               lineHeight: 1.8,
               whiteSpace: isMobile ? "normal" : "nowrap",
-              margin: 0,
+              margin: "0 0 16px",
             }}
           >
             {tagline}
+          </p>
+          <p
+            style={{
+              fontFamily: "Inter, system-ui, sans-serif",
+              fontSize: isMobile ? "13px" : "14px",
+              color: isMobile ? "#666" : "#888",
+              lineHeight: 1.75,
+              margin: 0,
+              maxWidth: "420px",
+            }}
+          >
+            Every product I have built started with the same frustration. I was looking for a clear answer in a noisy category and the right tool did not exist. So I built it. That is when AI creates the most value, turning personal pain points into shipped products.
           </p>
         </div>
 
