@@ -171,7 +171,7 @@ export default function WhatIBring() {
         margin: "0 0 40px",
         lineHeight: 1.15,
       }}>
-        What I Bring to the Table.
+        The Experiences That Shape How I Build
       </h2>
 
       {/* Grid */}
