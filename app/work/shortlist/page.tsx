@@ -549,12 +549,12 @@ export default function ShortlistPage() {
                 desc="Most job seekers send the same resume to every role. Shortlist tells you which version to send and what to change before you apply."
               />
               <FeatureCard
-                title="Color coded Excel output"
-                desc="Results export to a ranked Excel file with green for strong matches (80+), yellow for partial matches (65–79), and red for poor matches (below 65). Every row includes a direct apply link so the path from shortlist to application is one click."
-              />
-              <FeatureCard
                 title="Fully configurable and open source"
                 desc="Target roles, company tiers, excluded companies, salary floor, and location preferences all live in a single config file separate from the core logic. This architecture decision made it possible to open source the tool without exposing private job search strategy."
+              />
+              <FeatureCard
+                title="Color coded Excel output"
+                desc="Results export to a ranked Excel file with green for strong matches (80+), yellow for partial matches (65–79), and red for poor matches (below 65). Every row includes a direct apply link so the path from shortlist to application is one click."
               />
             </section>
 
