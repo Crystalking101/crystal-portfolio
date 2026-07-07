@@ -556,6 +556,17 @@ export default function ShortlistPage() {
                 title="Color coded Excel output"
                 desc="Results export to a ranked Excel file with green for strong matches (80+), yellow for partial matches (65–79), and red for poor matches (below 65). Every row includes a direct apply link so the path from shortlist to application is one click."
               />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/excel-design.png"
+                alt="Shortlist Excel output showing color coded job scores — green for strong matches, yellow for partial matches"
+                style={{
+                  width: "100%",
+                  borderRadius: "12px",
+                  margin: "8px 0 20px",
+                  border: `1px solid ${BORDER}`,
+                }}
+              />
             </section>
 
             <Divider />
