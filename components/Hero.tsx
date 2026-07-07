@@ -93,9 +93,9 @@ export default function Hero() {
             style={{
               fontFamily: "Inter, system-ui, sans-serif",
               fontSize: isMobile ? "13px" : "14px",
-              color: isMobile ? "#666" : "#888",
+              color: "#E8B4B8",
               lineHeight: 1.75,
-              margin: 0,
+              margin: "32px 0 0",
               maxWidth: "420px",
             }}
           >
